@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.0.75.1:3306/test?serverTimezone=Hongkong&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: fur@6289
