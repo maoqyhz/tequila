@@ -1,12 +1,15 @@
-eureka:
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8080/eureka/
-server:
-  port: 8085
 spring:
   application:
     name: services-consumer
+server:
+  port: 8085
+eureka:
+  #  instance:
+  #    prefer-ip-address: true
+  #    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
+feign:
+  hystrix:
+    enabled: true

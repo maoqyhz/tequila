@@ -2,7 +2,6 @@ package xyz.furur.load;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Fururur
@@ -10,16 +9,24 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 public class ConsumerController {
-    private final String servicesUrl = "http://services-provider/";
-    private final RestTemplate restTemplate;
+    // 使用RestTemplate请取消注释
+    // private final String servicesUrl = "http://services-provider/";
+    // private final RestTemplate restTemplate;
 
-    public ConsumerController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    // public ConsumerController(RestTemplate restTemplate) {
+    //     this.restTemplate = restTemplate;
+    // }
+
+    private final IRestRemote remote;
+
+    public ConsumerController(IRestRemote remote) {
+        this.remote = remote;
     }
 
     @RequestMapping("/")
     public String home() {
-        return restTemplate.getForObject(servicesUrl,String.class);
+        return remote.home();
+        // return restTemplate.getForObject(servicesUrl,String.class);
     }
 
 }
