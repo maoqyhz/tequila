@@ -8,7 +8,7 @@
         <version>2.1.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>xyz.furur</groupId>
     <artifactId>spring-docker</artifactId>
     <version>1.0.0</version>
     <name>spring-docker</name>

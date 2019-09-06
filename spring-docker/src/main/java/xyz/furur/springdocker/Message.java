@@ -1,4 +1,4 @@
-package com.example.springdocker;
+package xyz.furur.springdocker;
 
 /**
  * @author Fururur

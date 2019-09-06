@@ -1,4 +1,4 @@
-package com.example.springdocker;
+package xyz.furur.springdocker;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

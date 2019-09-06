@@ -1,4 +1,4 @@
-package com.example.springdocker;
+package xyz.furur.springdocker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
