@@ -1,0 +1,33 @@
+image: docker:latest
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://172.17.193.109:2375
+  TAG: root/hello-spring:v0.1
+cache:
+  paths:
+    - .m2/repository
+services:
+  - docker:dind
+stages:
+  - package
+  - deploy
+maven-package:
+  image: maven:3.5-jdk-8-alpine
+  tags:
+    - maven
+  stage: package
+  script:
+    - mvn clean package -Dmaven.test.skip=true
+  artifacts:
+    paths:
+      - target/*.jar     
+build-master:
+  tags:
+    - docker
+  stage: deploy
+  script:
+    - docker build -t $TAG .
+    - docker rm -f test || true
+    - docker run -d --name test -p 5000:5000 $TAG 
+  only:
+    - master

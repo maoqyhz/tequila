@@ -1,0 +1,28 @@
+version: '3'
+services:
+    gitlab:
+      image: gitlab/gitlab-ce:latest
+      container_name: "gitlab"
+      restart: unless-stopped
+      privileged: true
+      hostname: "172.17.193.109:7780"
+      environment:
+        GITLAB_OMNIBUS_CONFIG: |
+          # external_url 'http://172.17.193.109:7780'
+          gitlab_rails["time_zone"] = "Asia/Shanghai"
+          gitlab_rails["gitlab_shell_ssh_port"] = 7722
+          nginx["listen_port"] = 80
+      ports:
+        - "7780:80"
+        - "7722:22"
+      volumes:
+        - /home/cache/gitlab/config:/etc/gitlab
+        - /home/cache/gitlab/data:/var/opt/gitlab
+        - /home/cache/gitlab/logs:/var/log/gitlab
+    gitlab-runner:
+      container_name: gitlab-runner
+      image: gitlab/gitlab-runner:latest
+      restart: always
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock"
+        - "/home/cache/gitlab/runner-config:/etc/gitlab-runner"
