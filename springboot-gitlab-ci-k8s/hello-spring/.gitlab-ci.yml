@@ -1,0 +1,56 @@
+image: docker:latest
+variables:
+  DOCKER_DRIVER: overlay2
+  MAVEN_OPTS: "-Dmaven.repo.local=/home/cache/maven"
+  REGISTRY: "registry.cn-hangzhou.aliyuncs.com"
+  TAG: "tmp-images/hello-spring"
+  TEST_POD: "hello-spring"
+  TEST_POD_CONTAINER: "spring-boot"
+# cache:
+#   paths:
+#     - /home/cache/maven
+stages:
+  - package
+  - build
+  - deploy
+  - release
+maven-package:
+  image: maven:3.5-jdk-8-alpine
+  tags:
+    - maven
+  stage: package
+  script:
+    - mvn clean package -Dmaven.test.skip=true
+  artifacts:
+    paths:
+      - target/*.jar  
+docker-build:
+#   image: docker:latest
+  tags:
+    - docker 
+  stage: build 
+  script:
+    - echo "Building Dockerfile-based application..."
+    - docker login --username=maoqyhz@outlook.com registry.cn-hangzhou.aliyuncs.com -p mqy@6289
+    - docker build -t $REGISTRY/$TAG:$CI_COMMIT_SHORT_SHA .
+    - docker push $REGISTRY/$TAG
+  only:
+    - master
+k8s-deploy:
+  image: bitnami/kubectl:latest
+  tags:
+    - k8s
+  stage: deploy
+  script:
+    - echo "deploy to k8s cluster..."
+    - kubectl version
+    - kubectl set image deployment/$TEST_POD $TEST_POD_CONTAINER=$REGISTRY/$TAG:$CI_COMMIT_SHORT_SHA --namespace gitlab-runners
+  only:
+    - master
+#   when: manual
+release:
+  stage: release
+  script:
+    - echo "release to prod env..."
+  when: manual
+
