@@ -62,7 +62,7 @@ public class SignUtil {
         if (body instanceof String) {
             StringBuilder sbParams = buildResource(params, null);
             String encryptedBody = MessageDigestUtil.base64AndMD5((String) body);
-            sb.append(sbParams).append(encryptedBody);
+            sb.append(sbParams).append("\n").append(encryptedBody);
             log.debug((String) body);
             log.debug(encryptedBody);
         } else {
