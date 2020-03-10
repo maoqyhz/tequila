@@ -7,10 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author Fururur
@@ -47,7 +44,16 @@ public class SignUtil {
 
     /**
      * 生成 strToSign
-     * Content-type为 application/x-www-form-urlencoded
+     * 1. 约定请求时会携带 ak 作为参数并放入 HTTP Header。
+     * 2. 请求参数处理：
+     *    - GET：取出所有的参数，并根据 key 进行字典排序，拼装成如下格式。
+     *    - POST：如果是 `application/x-www-form-urlencoded`，直接取出和 GET 参数进行排序拼接，
+     *      如果是 `application/json`，则直接将整个 json 串 md5 加密后再 base64。
+     *
+     * GET:
+     * strToSign = uri + "\n" + ak=ak&k1=v1&k2=v2&k3=v3
+     * POST:
+     * strToSign = uri + "\n" + ak=ak&k1=v1Z&k2=v2&k3=v3 + "\n" + base64(md5(json_body))
      *
      * @param ak
      * @param uri
@@ -62,12 +68,15 @@ public class SignUtil {
         if (body instanceof String) {
             StringBuilder sbParams = buildResource(params, null);
             String encryptedBody = MessageDigestUtil.base64AndMD5((String) body);
-            sb.append(sbParams).append("\n").append(encryptedBody);
+            if (sbParams != null)
+                sb.append(sbParams);
+            sb.append("\n").append(encryptedBody);
             log.debug((String) body);
             log.debug(encryptedBody);
         } else {
             StringBuilder sbParams = buildResource(params, (Map<String, String>) body);
-            sb.append(sbParams);
+            if (sbParams != null)
+                sb.append(sbParams);
         }
         log.debug(sb.toString());
         return sb.toString();

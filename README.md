@@ -7,6 +7,6 @@
 - spring-logs—— 分类日志输出示例
 - springboot-gitlab-ci——gitlab ci部署spring boot项目
 - springboot-gitlab-ci-k8s——gitlab ci部署spring boot项目使用kubernetes executor
-- springboot-cache——redis登录场景下的demo
+- springboot-redis——redis相关的demo
 - springboot-api-sign——api签名demo
 
