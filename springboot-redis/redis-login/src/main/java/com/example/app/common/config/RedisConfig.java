@@ -29,8 +29,8 @@ public class RedisConfig extends CachingConfigurerSupport {
      * @return
      */
     @Bean("redisTemplate")
-    public RedisTemplate<?, ?> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<?, ?> template = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new JdkSerializationRedisSerializer());
@@ -39,8 +39,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Primary
     @Bean("redisTemplateJson")
-    public RedisTemplate<?, ?> redisTemplateJson(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<?, ?> template = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplateJson(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
         GenericFastJsonRedisSerializer fastJsonRedisSerializer = new GenericFastJsonRedisSerializer();

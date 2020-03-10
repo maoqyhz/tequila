@@ -13,5 +13,4 @@ public class RedisLoginApplication {
     public static void main(String[] args) {
         SpringApplication.run(RedisLoginApplication.class, args);
     }
-
 }
