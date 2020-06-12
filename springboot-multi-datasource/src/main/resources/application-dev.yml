@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    hangzhou:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://172.17.11.72:3306/gpucluster?serverTimezone=Hongkong&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
+    shanghai:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://172.21.30.61:3306/gpucluster?serverTimezone=Hongkong&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
+  jpa:
+    open-in-view: true
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /web/**
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  output:
+    ansi:
+      enabled: DETECT
+logging:
+  file:
+    path: ./logs/
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 100
+    min-spare-threads: 20
+  port: 8088
+meta:
