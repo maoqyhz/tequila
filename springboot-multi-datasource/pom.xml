@@ -32,7 +32,7 @@
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
         <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
-        <guava.version>28.0-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <fastjson.version>1.2.59</fastjson.version>
         <httpclient.version>4.5.9</httpclient.version>
         <commons-io.version>2.6</commons-io.version>
