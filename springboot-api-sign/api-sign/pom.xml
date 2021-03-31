@@ -19,7 +19,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <fastjson.version>1.2.59</fastjson.version>
         <lombok.version>1.18.10</lombok.version>
-        <guava.version>28.0-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
     </properties>
 
     <dependencies>
