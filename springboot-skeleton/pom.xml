@@ -21,7 +21,7 @@
         <guava.version>28.0-jre</guava.version>
         <fastjson.version>1.2.59</fastjson.version>
         <httpclient.version>4.5.9</httpclient.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <caffeine.version>2.8.0</caffeine.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jsch.version>0.1.55</jsch.version>
